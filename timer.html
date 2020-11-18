@@ -1,0 +1,275 @@
+<html lang="en" translate="no">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" href="Font-Awesome/css/all.css">
+		<link rel="stylesheet" href="TimeCircles/inc/TimeCircles.css">
+		<link rel="stylesheet" href="timer.css">
+		<script type="text/javascript" src="jquery/dist/jquery.js"></script>
+		<script type="text/javascript" src="bootstrap/dist/js/bootstrap.bundle.js"></script>
+		<script type="text/javascript" src="TimeCircles/inc/TimeCircles.js"></script>
+		<script type="text/javascript" src="timer.js"></script>
+	</head>
+	<body>
+		<main role="main" class="container">
+			<section id="timer" data-timer="1" style="margin-top:10vw; margin-bottom:5vw; margin-left:auto; margin-right:auto; height:20vw; width:80vw;">
+				<!-- data-timer="5" data-date="2020-11-18 16:10:50" -->
+			</section>
+			<section id="config" style="display:None;">
+				<audio id="audio" type="audio/mpeg" src="alarms/double-piep.mp3"></audio>
+			</section>
+			<section id="controls" class="row">
+				<div class="col-12">
+					<div class="d-flex justify-content-center mt-2 mb-2">
+					   <div id="timer" class="btn-group btn-group-lg ml-1 mr-1" role="group" aria-label="Timer Controls">
+							<button id="start" class="btn btn-success">
+								<i class="fas fa-play"></i>
+							</button>
+							<button id="stop" class="btn btn-danger">
+								<i class="fas fa-pause"></i>
+							</button>
+							<button id="reset" class="btn btn-secondary">
+								<i class="fas fa-history"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6">
+					<div class="d-flex justify-content-center justify-content-sm-end mt-2 mb-2">
+						<div class="btn-group btn-group-sm" role="group" aria-label="Alarm Controls">
+							<button class="btn btn-info disabled">
+								<i class="fas fa-bell-slash pr-1"></i>
+								<span>off</span>
+							</button>
+							<button class="btn btn-info">
+								<i class="fas fa-bell pr-1"></i>
+								<span>on</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6">
+					<div class="d-flex justify-content-center justify-content-sm-start mt-2 mb-2">
+						<button class="btn btn-sm btn-info playalarm" aria-label="Test Alarm">
+							<span>test</span>
+							<i class="fas fa-volume-up pl-1"></i>
+						</button>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6">
+					<div class="d-flex justify-content-center justify-content-sm-end mt-2 mb-2">
+						<div class="btn-group btn-group-sm" role="group" aria-label="Duration Presets">
+							<button id="btnGroupPresetsMin" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fas fa-hourglass-start pr-1"></i>
+								<span>set duration</span>
+							</button>
+							<div id="btnGroupPresetsMinValues" class="dropdown-menu" aria-labelledby="btnGroupPresetsMin">
+								<a class="dropdown-item" href="#">1 min</a>
+								<a class="dropdown-item" href="#">2 min</a>
+								<a class="dropdown-item" href="#">3 min</a>
+								<a class="dropdown-item" href="#">5 min</a>
+								<a class="dropdown-item" href="#">10 min</a>
+								<a class="dropdown-item" href="#">15 min</a>
+								<a class="dropdown-item" href="#">20 min</a>
+								<a class="dropdown-item" href="#">30 min</a>
+								<a class="dropdown-item" href="#">45 min</a>
+								<a class="dropdown-item" href="#">60 min</a>
+								<a class="dropdown-item" href="#">90 min</a>
+								<a class="dropdown-item" href="#">120 min</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6">
+					<div class="d-flex justify-content-center justify-content-sm-start mt-2 mb-2">
+						<div class="btn-group btn-group-sm" role="group" aria-label="End Time Presets">
+							<button id="btnGroupPresetsMin" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fas fa-clock pr-1"></i>
+								<span>set end time</span>
+							</button>
+							<div id="btnGroupPresetsMinValues" class="dropdown-menu" aria-labelledby="btnGroupPresetsMin">
+								<a class="dropdown-item" href="#">6:00</a>
+								<a class="dropdown-item" href="#">9:00</a>
+								<a class="dropdown-item" href="#">12:00</a>
+								<a class="dropdown-item" href="#">18:00</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="settings" class="row">
+				<form id="countdownSettings" class="needs-validation col-12 col-sm-6 col-lg-3">			
+					<p class="mb-0 text-center text-sm-right"><strong>Individual Duration</strong></p>
+					<div class="input-group justify-content-center justify-content-sm-end">
+						<div class="input-group-prepend">
+							<label for="countdownYear">Year</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="countdownYear" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<div class="input-group justify-content-center justify-content-sm-end">
+						<div class="input-group-prepend">
+							<label for="endTimeMonth">Month</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeMonth" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<div class="input-group justify-content-center justify-content-sm-end">
+						<div class="input-group-prepend">
+							<label for="endTimeDay">Day</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeDay" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<div class="input-group justify-content-center justify-content-sm-end">
+						<div class="input-group-prepend">
+							<label for="endTimeHour">Hour</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeHour" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<div class="input-group justify-content-center justify-content-sm-end">
+						<div class="input-group-prepend">
+							<label for="endTimeMinute">Minute</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeMinute" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<div class="input-group justify-content-center justify-content-sm-end">
+						<div class="input-group-prepend">
+							<label for="endTimeSecond">Second</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeSecond" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<button class="btn btn-sm btn-info mt-2 float-sm-right" aria-label="set duration">
+						<span>set duration</span>
+						<i class="fas fa-history"></i>
+					</button>
+				</form>
+				<form id="endTimeSettings" class="needs-validation col-12 col-sm-6 col-lg-3">
+					<p class="mb-0 text-center text-sm-left"><strong>Individual End Time</strong></p>
+					<div class="input-group justify-content-center justify-content-sm-start">
+						<div class="input-group-prepend">
+							<label for="endTimeYear">Year</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeYear" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<div class="input-group justify-content-center justify-content-sm-start">
+						<div class="input-group-prepend">
+							<label for="endTimeMonth">Month</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeMonth" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<div class="input-group justify-content-center justify-content-sm-start">
+						<div class="input-group-prepend">
+							<label for="endTimeDay">Day</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeDay" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<div class="input-group justify-content-center justify-content-sm-start">
+						<div class="input-group-prepend">
+							<label for="endTimeHour">Hour</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeHour" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<div class="input-group justify-content-center justify-content-sm-start">
+						<div class="input-group-prepend">
+							<label for="endTimeMinute">Minute</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeMinute" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<div class="input-group justify-content-center justify-content-sm-start">
+						<div class="input-group-prepend">
+							<label for="endTimeSecond">Second</label>
+							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
+						</div>
+						<input id="endTimeSecond" type="text" inputmode="decimal" style="text-align: center" required="">
+						<div class="input-group-append">
+							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
+						</div>
+					</div>
+					<button class="btn btn-sm btn-info mt-2" aria-label="set end time">
+						<span>set end time</span>
+						<i class="fas fa-history"></i>
+					</button>
+				</form>
+				<div class="col-12 col-lg-6">
+					<h2>Additional Settings</h2>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck0" checked>
+						<label class="form-check-label" for="exampleCheck0">hide controls if timer is running</label>
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
+						<label class="form-check-label" for="exampleCheck1">hide left timers if zero</label>
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck2">
+						<label class="form-check-label" for="exampleCheck2">show the two highest timers only</label>
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck4">
+						<label class="form-check-label" for="exampleCheck4">pop up if timer exceeded</label>
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck5">
+						<label class="form-check-label" for="exampleCheck5">repeat alarm sound ___ times</label>
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck3">
+						<label class="form-check-label" for="exampleCheck3">repeat timer after ___ seconds/minutes/hours</label>
+					</div>
+				</div>
+			</section>
+			<section id="issues">
+				<h2>known issues</h2>
+				<ul>
+					<li>buttons not working</li>
+					<li>date formant confusing</li>
+					<li>time format confusing and not valid for duration</li>
+					<li></li>
+				</ul>
+			</section>
+		</main>
+	</body>
+</html>

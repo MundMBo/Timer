@@ -1,0 +1,17 @@
+section{
+	margin-bottom: 2rem;
+}
+
+#controls #timer button{
+	font-size: 2rem;
+}
+
+#countdownSettings label,
+#endTimeSettings label{
+	width: 4rem;
+} 
+
+#countdownSettings input,
+#endTimeSettings input{
+	width: 3rem;
+} 
