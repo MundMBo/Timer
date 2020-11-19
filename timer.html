@@ -13,16 +13,15 @@
 	</head>
 	<body>
 		<main role="main" class="container">
-			<section id="timer" data-timer="1" style="margin-top:10vw; margin-bottom:5vw; margin-left:auto; margin-right:auto; height:20vw; width:80vw;">
-				<!-- data-timer="5" data-date="2020-11-18 16:10:50" -->
+			<section id="timer" class="timer" style="margin-top:10vw; margin-bottom:5vw; margin-left:auto; margin-right:auto; height:20vw; width:80vw;" data-timer="100">
 			</section>
-			<section id="config" style="display:None;">
+			<section id="config" class="config" style="display:None;" data-timer-new="" data-date-new="">
 				<audio id="audio" type="audio/mpeg" src="alarms/double-piep.mp3"></audio>
 			</section>
 			<section id="controls" class="row">
 				<div class="col-12">
 					<div class="d-flex justify-content-center mt-2 mb-2">
-					   <div id="timer" class="btn-group btn-group-lg ml-1 mr-1" role="group" aria-label="Timer Controls">
+					   <div id="controls-timer" class="btn-group btn-group-lg ml-1 mr-1" role="group" aria-label="Timer Controls">
 							<button id="start" class="btn btn-success">
 								<i class="fas fa-play"></i>
 							</button>
@@ -106,7 +105,7 @@
 							<label for="countdownYear">Year</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="countdownYear" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="countdownYear" class="timer-input duration" type="number" value="0" min="0" max="" data-unit-max="0" data-factor-to-seconds="31536000" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
@@ -116,7 +115,7 @@
 							<label for="endTimeMonth">Month</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeMonth" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeMonth" class="timer-input duration" type="number" value="0" min="0" max="" data-unit-max="12" data-factor-to-seconds="2592000" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
@@ -126,7 +125,7 @@
 							<label for="endTimeDay">Day</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeDay" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeDay" class="timer-input duration" type="number" value="0" min="0" max="" data-unit-max="0" data-factor-to-seconds="86400" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
@@ -136,7 +135,7 @@
 							<label for="endTimeHour">Hour</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeHour" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeHour" class="timer-input duration" type="number" value="0" min="0" max="" data-unit-max="24" data-factor-to-seconds="3600" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
@@ -146,7 +145,7 @@
 							<label for="endTimeMinute">Minute</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeMinute" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeMinute" class="timer-input duration" class="timer-input duration" type="number" value="0" min="0" max="" data-unit-max="60" data-factor-to-seconds="60" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
@@ -156,12 +155,12 @@
 							<label for="endTimeSecond">Second</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeSecond" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeSecond" class="timer-input duration" type="number" value="0" min="0" max="" data-unit-max="60" data-factor-to-seconds="1" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
 					</div>
-					<button class="btn btn-sm btn-info mt-2 float-sm-right" aria-label="set duration">
+					<button id="setDuration" class="btn btn-sm btn-info mt-2 float-sm-right" aria-label="set duration" onclick="return false;">
 						<span>set duration</span>
 						<i class="fas fa-history"></i>
 					</button>
@@ -173,7 +172,7 @@
 							<label for="endTimeYear">Year</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeYear" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeYear" class="timer-input endtime" type="number" value="2020" min="1900" max="2999" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
@@ -183,7 +182,7 @@
 							<label for="endTimeMonth">Month</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeMonth" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeMonth" class="timer-input endtime" type="number" value="1" min="1" max="12" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
@@ -193,7 +192,7 @@
 							<label for="endTimeDay">Day</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeDay" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeDay" class="timer-input endtime" type="number" value="1" min="1" max="31" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
@@ -203,7 +202,7 @@
 							<label for="endTimeHour">Hour</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeHour" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeHour" class="timer-input endtime" type="number" value="0" min="0" max="23" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
@@ -213,7 +212,7 @@
 							<label for="endTimeMinute">Minute</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeMinute" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeMinute" class="timer-input endtime" type="number" value="0" min="0" max="59" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
@@ -223,12 +222,12 @@
 							<label for="endTimeSecond">Second</label>
 							<button style="min-width: 2rem" class="btn btn-decrement btn-outline-secondary btn-minus" type="button"><strong>−</strong></button>
 						</div>
-						<input id="endTimeSecond" type="text" inputmode="decimal" style="text-align: center" required="">
+						<input id="endTimeSecond" class="timer-input endtime" type="number" value="0" min="0" max="59" style="text-align: center" required>
 						<div class="input-group-append">
 							<button style="min-width: 2rem" class="btn btn-increment btn-outline-secondary btn-plus" type="button"><strong>+</strong></button>
 						</div>
 					</div>
-					<button class="btn btn-sm btn-info mt-2" aria-label="set end time">
+					<button id="setEndTime" class="btn btn-sm btn-info mt-2" aria-label="set end time" onclick="return false;">
 						<span>set end time</span>
 						<i class="fas fa-history"></i>
 					</button>
@@ -264,6 +263,7 @@
 			<section id="issues">
 				<h2>known issues</h2>
 				<ul>
+					<li>timer resets when changing window size</li>
 					<li>buttons not working</li>
 					<li>date formant confusing</li>
 					<li>time format confusing and not valid for duration</li>
